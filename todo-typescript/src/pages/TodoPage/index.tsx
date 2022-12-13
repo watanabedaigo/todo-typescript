@@ -1,24 +1,8 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-import styles from './styles.module.scss';
+import React from 'react';
+import TodoTemplate from 'components/templates/TodoTemplate';
 
 const TodoPage: React.FC<{}> = () => {
-  let url: string = 'http://localhost:3000/todos';
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(url);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return <p className={styles.test}>todo page</p>;
+  return <TodoTemplate />;
 };
 
 export default TodoPage;
