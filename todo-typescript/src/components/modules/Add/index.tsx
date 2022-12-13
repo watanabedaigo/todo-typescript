@@ -5,21 +5,14 @@ import { postTodo } from 'apis/todos';
 import { ulid } from 'ulid';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
-import { Todos } from 'components/templates/TodoTemplate';
-
-// 型エイリアス
-// Addの型
-// type AddProps = {
-//   todos: TodoType[];
-//   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-// };
+import { TodosContext } from 'providers/TodoTemplateProvider';
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const Add: React.FC = React.memo(() => {
   console.log('Add レンダリング');
 
   // useContext
-  const { todos, setTodos } = useContext(Todos);
+  const { todos, setTodos } = useContext(TodosContext);
 
   // useRef
   const inputRef = useRef<HTMLInputElement>(null!);
@@ -46,7 +39,7 @@ const Add: React.FC = React.memo(() => {
   return (
     <div>
       <InputForm placeholder="todoを入力" inputRef={inputRef} />
-      <Button value="追加" />
+      <Button value="追加" callback={addTodo} />
     </div>
   );
 });
