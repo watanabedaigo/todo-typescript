@@ -42,7 +42,7 @@ const Add: React.FC<AddProps> = React.memo(({ todos, setTodos }) => {
   return (
     <div>
       <InputForm placeholder="todoを入力" inputRef={inputRef} />
-      <Button value="追加" />
+      <Button value="追加" callback={addTodo} />
     </div>
   );
 });

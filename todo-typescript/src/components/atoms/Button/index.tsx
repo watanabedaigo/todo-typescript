@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 // Buttonの型
 type ButtonProps = {
   value: string;
-  callback?: () => void;
+  callback: () => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止

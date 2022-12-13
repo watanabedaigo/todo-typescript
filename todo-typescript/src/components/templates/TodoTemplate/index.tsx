@@ -10,21 +10,29 @@ const TodoTemplate: React.FC = () => {
   // todoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
   const [todos, setTodos] = useState<TodoType[]>([]);
 
-  // データ取得の関数
-  const fetchData = async () => {
-    getTodo()
-      .then((todosData) => {
-        setTodos([...todosData]);
-      })
-      .catch((Error) => {
-        console.error(Error);
-      });
-  };
-
   // useEffect
   // 依存配列は空なので、初回レンダリング後に実行される
   useEffect(() => {
+    // クリーンアップ関数
+    let unmounted = false;
+
+    // データ取得の関数;
+    const fetchData = async () => {
+      getTodo()
+        .then((todosData) => {
+          if (!unmounted) {
+            setTodos([...todosData]);
+          }
+        })
+        .catch((Error) => {
+          console.error(Error);
+        });
+    };
     fetchData();
+
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   return (
