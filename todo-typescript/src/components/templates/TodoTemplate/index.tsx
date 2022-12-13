@@ -5,10 +5,19 @@ import { TodoType } from 'types/TodoType';
 import { getTodo } from 'apis/todos';
 import Add from 'components/modules/Add';
 
+// createContext
+export const Todos = createContext<any>(undefined);
+
 const TodoTemplate: React.FC = () => {
   // useState
   // todoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
   const [todos, setTodos] = useState<TodoType[]>([]);
+
+  // useContext Provider用value
+  const value = {
+    todos,
+    setTodos,
+  };
 
   // データ取得の関数
   const fetchData = async () => {
@@ -29,7 +38,9 @@ const TodoTemplate: React.FC = () => {
 
   return (
     <div>
-      <Add todos={todos} setTodos={setTodos} />
+      <Todos.Provider value={value}>
+        <Add />
+      </Todos.Provider>
       <ul>
         {todos.map((todo: TodoType) => {
           return (

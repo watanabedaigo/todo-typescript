@@ -1,21 +1,25 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useContext } from 'react';
 import styles from './styles.module.scss';
 import { TodoType } from 'types/TodoType';
 import { postTodo } from 'apis/todos';
 import { ulid } from 'ulid';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
+import { Todos } from 'components/templates/TodoTemplate';
 
 // 型エイリアス
 // Addの型
-type AddProps = {
-  todos: TodoType[];
-  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-};
+// type AddProps = {
+//   todos: TodoType[];
+//   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
+// };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
-const Add: React.FC<AddProps> = React.memo(({ todos, setTodos }) => {
+const Add: React.FC = React.memo(() => {
   console.log('Add レンダリング');
+
+  // useContext
+  const { todos, setTodos } = useContext(Todos);
 
   // useRef
   const inputRef = useRef<HTMLInputElement>(null!);
