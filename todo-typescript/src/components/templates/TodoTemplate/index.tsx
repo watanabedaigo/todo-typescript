@@ -1,11 +1,14 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.scss';
 import { TodoType } from 'types/TodoType';
 import { getTodo } from 'apis/todos';
 import Add from 'components/modules/Add';
+import List from 'components/atoms/List';
 
 const TodoTemplate: React.FC = () => {
+  console.log('TodoTemplate レンダリング');
+
   // useState
   // todoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -38,15 +41,7 @@ const TodoTemplate: React.FC = () => {
   return (
     <div>
       <Add todos={todos} setTodos={setTodos} />
-      <ul>
-        {todos.map((todo: TodoType) => {
-          return (
-            <li key={todo.id}>
-              <p>{todo.content}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <List todos={todos} setTodos={setTodos} />
     </div>
   );
 };

@@ -22,7 +22,7 @@ const Add: React.FC<AddProps> = React.memo(({ todos, setTodos }) => {
 
   // コールバック関数
   // propsで渡すためメモ化、依存配列にstate指定しているためメモ化意味なし？
-  const addTodo = useCallback(() => {
+  const addTodo = () => {
     const value = inputRef.current.value;
     const newTodo: TodoType = {
       id: ulid(),
@@ -37,7 +37,7 @@ const Add: React.FC<AddProps> = React.memo(({ todos, setTodos }) => {
       .catch((Error) => {
         console.error(Error);
       });
-  }, [todos]);
+  };
 
   return (
     <div>
