@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './styles.module.scss';
+import { EventType } from 'types/EventType';
 
 // 型エイリアス
 // Buttonの型
 type ButtonProps = {
   value: string;
-  callback: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  callback: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止

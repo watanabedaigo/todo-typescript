@@ -2,12 +2,13 @@ import React, { useCallback, useRef } from 'react';
 import styles from './styles.module.scss';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
+import { EventType } from 'types/EventType';
 
 // 型エイリアス
 // Addの型
 type AddProps = {
   inputAddRef: React.MutableRefObject<HTMLInputElement>;
-  addTodo: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  addTodo: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止

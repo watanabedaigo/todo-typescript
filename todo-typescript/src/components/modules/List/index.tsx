@@ -1,14 +1,15 @@
 import React, { useCallback } from 'react';
 import { TodoType } from 'types/TodoType';
 import Button from 'components/atoms/Button';
+import { EventType } from 'types/EventType';
 
 // 型エイリアス
 // Addの型
 type ListProps = {
   notDoneTodos: TodoType[];
   doneTodos: TodoType[];
-  toggleDone: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  removeTodo: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  toggleDone: (event: EventType) => void;
+  removeTodo: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
