@@ -18,6 +18,9 @@ export const postTodo = async (newTodo: TodoType) => {
   return newTodoData;
 };
 
-// PUT
-
 // DELETE
+export const deleteTodo = async (id: string) => {
+  const response = await axios.delete(`${url}/${id}`);
+  const deletedTodo: TodoType = response.data;
+  return deletedTodo;
+};

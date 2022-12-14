@@ -5,8 +5,7 @@ import styles from './styles.module.scss';
 // InputFormの型
 type InputFormProps = {
   placeholder: string;
-  // 修正：型付け
-  inputRef: any;
+  inputRef: React.MutableRefObject<HTMLInputElement>;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止

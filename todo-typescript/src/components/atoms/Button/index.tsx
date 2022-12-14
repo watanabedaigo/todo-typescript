@@ -5,12 +5,12 @@ import styles from './styles.module.scss';
 // Buttonの型
 type ButtonProps = {
   value: string;
-  callback: () => void;
+  callback: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const Button: React.FC<ButtonProps> = React.memo(({ value, callback }) => {
-  console.log('Button レンダリング');
+  console.log(`Button ${value} レンダリング`);
 
   return <button onClick={callback}>{value}</button>;
 });

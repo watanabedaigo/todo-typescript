@@ -21,18 +21,26 @@ const Add: React.FC<AddProps> = React.memo(({ todos, setTodos }) => {
   const inputRef = useRef<HTMLInputElement>(null!);
 
   // コールバック関数
-  // propsで渡すためメモ化、依存配列にstate指定しているためメモ化意味なし？
+  // propsで渡すためメモ化、useCallbackの依存配列にstate指定しているためメモ化意味なし？
   const addTodo = () => {
-    const value = inputRef.current.value;
+    // 入力値取得
+    let value = inputRef.current.value;
+
+    // 追加データをオブジェクトで作成
     const newTodo: TodoType = {
       id: ulid(),
       content: value,
       done: false,
     };
 
+    // jsonに追加
     postTodo(newTodo)
       .then((newTodo) => {
+        // State更新
         setTodos([...todos, newTodo]);
+
+        // input初期化
+        inputRef.current.value = '';
       })
       .catch((Error) => {
         console.error(Error);
