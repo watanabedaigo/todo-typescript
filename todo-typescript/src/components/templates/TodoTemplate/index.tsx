@@ -46,7 +46,7 @@ const TodoTemplate: React.FC = () => {
     <div>
       <Add todos={todos} setTodos={setTodos} />
       <Search todos={todos} setTodos={setTodos} initialTodos={initialTodos} />
-      <List todos={todos} setTodos={setTodos} />
+      <List todos={todos} />
     </div>
   );
 };
