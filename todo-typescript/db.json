@@ -1,11 +1,6 @@
 {
   "todos": [
     {
-      "id": "01GM829ZY74RJVW6CGRNAN9FT6",
-      "content": "test01",
-      "done": false
-    },
-    {
       "id": "01GM82A7R3N5SNW0766AYHTBW0",
       "content": "test02",
       "done": true
@@ -18,7 +13,7 @@
     {
       "id": "01GM82ACWC6VYPG8XG814YNPPW",
       "content": "test04",
-      "done": false
+      "done": true
     }
   ]
 }

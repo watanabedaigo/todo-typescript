@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import * as apis from 'apis/todos';
 import { ulid } from 'ulid';
 import { TodoType } from 'types/TodoType';
+import { EventType } from 'types/EventType';
 
 export const useTodo = () => {
   // hooks
@@ -81,9 +82,7 @@ export const useTodo = () => {
   };
 
   // PUT
-  const toggleDone = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const toggleDone = (event: EventType) => {
     // ターゲットDOM取得
     const target = event.currentTarget.closest('li');
 
@@ -108,24 +107,21 @@ export const useTodo = () => {
   };
 
   // DELETE
-  const removeTodo = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      // ターゲットDOM取得
-      const target = event.currentTarget.closest('li');
+  const removeTodo = useCallback((event: EventType) => {
+    // ターゲットDOM取得
+    const target = event.currentTarget.closest('li');
 
-      // ターゲット取得後の処理
-      if (target !== null) {
-        // DOMから削除
-        target.remove();
+    // ターゲット取得後の処理
+    if (target !== null) {
+      // DOMから削除
+      target.remove();
 
-        // ターゲットDOMのid属性値取得
-        const targetId: string = target.getAttribute('id') as string;
-        // jsonから削除
-        apis.deleteTodo(targetId);
-      }
-    },
-    []
-  );
+      // ターゲットDOMのid属性値取得
+      const targetId: string = target.getAttribute('id') as string;
+      // jsonから削除
+      apis.deleteTodo(targetId);
+    }
+  }, []);
 
   // search
   const searchTodo = () => {
