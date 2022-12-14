@@ -1,9 +1,5 @@
 import React, { useCallback, useRef } from 'react';
 import styles from './styles.module.scss';
-import { TodoType } from 'types/TodoType';
-import { postTodo } from 'apis/todos';
-import { ulid } from 'ulid';
-import { useTodo } from 'hooks/useTodo';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
 

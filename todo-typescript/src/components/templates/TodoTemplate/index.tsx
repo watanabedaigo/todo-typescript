@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styles from './styles.module.scss';
-import { TodoType } from 'types/TodoType';
-import { getTodo } from 'apis/todos';
 import { useTodo } from 'hooks/useTodo';
 import Add from 'components/modules/Add';
 import Search from 'components/modules/Search';
@@ -13,9 +9,11 @@ const TodoTemplate: React.FC = () => {
 
   // カスタムフックからロジックを受け取る
   const {
-    todos,
+    notDoneTodos,
+    doneTodos,
     inputAddRef,
     addTodo,
+    toggleDone,
     removeTodo,
     inputSearchRef,
     searchTodo,
@@ -30,7 +28,12 @@ const TodoTemplate: React.FC = () => {
         searchTodo={searchTodo}
         resetTodo={resetTodo}
       />
-      <List todos={todos} removeTodo={removeTodo} />
+      <List
+        notDoneTodos={notDoneTodos}
+        doneTodos={doneTodos}
+        toggleDone={toggleDone}
+        removeTodo={removeTodo}
+      />
     </div>
   );
 };

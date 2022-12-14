@@ -18,6 +18,13 @@ export const postTodo = async (newTodo: TodoType) => {
   return newTodoData;
 };
 
+// PUT
+export const putTodo = async (id: string, targetTodo: TodoType) => {
+  const response = await axios.put(`${url}/${id}`, targetTodo);
+  const updatedTodo = response.data;
+  return updatedTodo;
+};
+
 // DELETE
 export const deleteTodo = async (id: string) => {
   const response = await axios.delete(`${url}/${id}`);
