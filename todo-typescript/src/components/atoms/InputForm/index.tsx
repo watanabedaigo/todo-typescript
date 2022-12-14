@@ -5,15 +5,22 @@ import styles from './styles.module.scss';
 // InputFormの型
 type InputFormProps = {
   placeholder: string;
-  inputRef: React.MutableRefObject<HTMLInputElement>;
+  inputAddRef?: React.MutableRefObject<HTMLInputElement>;
+  inputSearchRef?: React.MutableRefObject<HTMLInputElement>;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const InputForm: React.FC<InputFormProps> = React.memo(
-  ({ placeholder, inputRef }) => {
+  ({ placeholder, inputAddRef, inputSearchRef }) => {
     console.log('InputForm レンダリング');
 
-    return <input type="text" placeholder={placeholder} ref={inputRef} />;
+    return (
+      <input
+        type="text"
+        placeholder={placeholder}
+        ref={inputAddRef ? inputAddRef : inputSearchRef}
+      />
+    );
   }
 );
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './styles.module.scss';
 import { TodoType } from 'types/TodoType';
 import { getTodo } from 'apis/todos';
+import { useTodo } from 'hooks/useTodo';
 import Add from 'components/modules/Add';
 import Search from 'components/modules/Search';
 import List from 'components/modules/List';
@@ -10,43 +11,26 @@ import List from 'components/modules/List';
 const TodoTemplate: React.FC = () => {
   console.log('TodoTemplate レンダリング');
 
-  // useState
-  // 表示するtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
-  const [todos, setTodos] = useState<TodoType[]>([]);
-  // 初期取得時のtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
-  const [initialTodos, setInitialTodos] = useState<TodoType[]>([]);
-
-  // useEffect
-  // 依存配列は空なので、初回レンダリング後に実行される
-  useEffect(() => {
-    // クリーンアップ関数
-    let unmounted = false;
-
-    // データ取得の関数
-    const fetchData = async () => {
-      getTodo()
-        .then((todosData) => {
-          if (!unmounted) {
-            setTodos([...todosData]);
-            setInitialTodos([...todosData]);
-          }
-        })
-        .catch((Error) => {
-          console.error(Error);
-        });
-    };
-    fetchData();
-
-    return () => {
-      unmounted = true;
-    };
-  }, []);
+  // カスタムフックからロジックを受け取る
+  const {
+    todos,
+    inputAddRef,
+    addTodo,
+    removeTodo,
+    inputSearchRef,
+    searchTodo,
+    resetTodo,
+  } = useTodo();
 
   return (
     <div>
-      <Add todos={todos} setTodos={setTodos} />
-      <Search todos={todos} setTodos={setTodos} initialTodos={initialTodos} />
-      <List todos={todos} />
+      <Add inputAddRef={inputAddRef} addTodo={addTodo} />
+      <Search
+        inputSearchRef={inputSearchRef}
+        searchTodo={searchTodo}
+        resetTodo={resetTodo}
+      />
+      <List todos={todos} removeTodo={removeTodo} />
     </div>
   );
 };
