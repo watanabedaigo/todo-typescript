@@ -20,25 +20,7 @@ export const useTodo = () => {
     // クリーンアップ関数（React v18対応）
     let unmounted = false;
 
-    // GET
-    // データ取得の関数
-    const fetchData = async () => {
-      apis
-        .getTodo()
-        .then((todosData) => {
-          if (!unmounted) {
-            // 抽出、State更新
-            filterTodo(todosData);
-
-            // State更新
-            setAllTodos([...todosData]);
-          }
-        })
-        .catch((Error) => {
-          console.error(Error);
-        });
-    };
-    fetchData();
+    fetchTodo(unmounted);
 
     return () => {
       unmounted = true;
@@ -51,12 +33,29 @@ export const useTodo = () => {
   // 検索用のinput
   const inputSearchRef = useRef<HTMLInputElement>(null!);
 
-  // 関数
-  // propsで渡すためメモ化、useCallbackの依存配列にstate指定しないといけないためメモ化意味なし？
-  // Post
+  // 関数（api関係）
+  // GET
+  const fetchTodo = async (unmounted: boolean) => {
+    apis
+      .getTodo()
+      .then((todosData) => {
+        if (!unmounted) {
+          // 抽出、State更新
+          filterTodo(todosData);
+
+          // State更新
+          setAllTodos([...todosData]);
+        }
+      })
+      .catch((Error) => {
+        console.error(Error);
+      });
+  };
+
+  // POST
   const addTodo = () => {
     // 入力値取得
-    let value: string | number = inputRef.current.value;
+    let value: string = inputRef.current.value;
 
     // 追加データをオブジェクトで作成
     const newTodo: TodoType = {
@@ -109,7 +108,7 @@ export const useTodo = () => {
   // PUT（contentプロパティ）
   const updateContent = (event: EventType) => {
     // 入力値取得
-    let value: string | number = inputRef.current.value;
+    let value: string = inputRef.current.value;
 
     // ターゲットDOM取得
     const target: TodoType = getTargetJson();
@@ -138,6 +137,7 @@ export const useTodo = () => {
     }
   }, []);
 
+  // 関数（api以外）
   // search
   const searchTodo = () => {
     // 入力値取得
