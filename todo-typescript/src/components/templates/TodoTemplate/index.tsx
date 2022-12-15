@@ -11,7 +11,7 @@ const TodoTemplate: React.FC = () => {
   const {
     notDoneTodos,
     doneTodos,
-    toggleDone,
+    updateDone,
     removeTodo,
     inputSearchRef,
     searchTodo,
@@ -31,7 +31,7 @@ const TodoTemplate: React.FC = () => {
       <List
         notDoneTodos={notDoneTodos}
         doneTodos={doneTodos}
-        toggleDone={toggleDone}
+        updateDone={updateDone}
         removeTodo={removeTodo}
       />
     </div>

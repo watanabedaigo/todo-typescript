@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import * as apis from 'apis/todos';
 import { ulid } from 'ulid';
 import { TodoType } from 'types/TodoType';
@@ -47,7 +47,7 @@ export const useTodo = () => {
 
   // useRef
   // 追加用のinput
-  const inputAddRef = useRef<HTMLInputElement>(null!);
+  const inputRef = useRef<HTMLInputElement>(null!);
   // 検索用のinput
   const inputSearchRef = useRef<HTMLInputElement>(null!);
 
@@ -56,7 +56,7 @@ export const useTodo = () => {
   // Post
   const addTodo = () => {
     // 入力値取得
-    let value = inputAddRef.current.value;
+    let value: string | number = inputRef.current.value;
 
     // 追加データをオブジェクトで作成
     const newTodo: TodoType = {
@@ -74,15 +74,15 @@ export const useTodo = () => {
         setNotDoneTodos([...notDoneTodos, newTodo]);
 
         // input初期化
-        inputAddRef.current.value = '';
+        inputRef.current.value = '';
       })
       .catch((Error) => {
         console.error(Error);
       });
   };
 
-  // PUT
-  const toggleDone = (event: EventType) => {
+  // PUT（doneプロパティ）
+  const updateDone = (event: EventType) => {
     // ターゲットDOM取得
     const target = event.currentTarget.closest('li');
 
@@ -104,6 +104,21 @@ export const useTodo = () => {
 
     // 抽出、State更新
     filterTodo(allTodos);
+  };
+
+  // PUT（contentプロパティ）
+  const updateContent = (event: EventType) => {
+    // 入力値取得
+    let value: string | number = inputRef.current.value;
+
+    // ターゲットDOM取得
+    const target: TodoType = getTargetJson();
+
+    // ターゲットjsonのcontentを上書き
+    target.content = value;
+
+    // json変更
+    apis.putTodo(target.id, target);
   };
 
   // DELETE
@@ -204,13 +219,15 @@ export const useTodo = () => {
     doneTodos,
     setNotDoneTodos,
     setDoneTodos,
-    inputAddRef,
+    inputRef,
     addTodo,
-    toggleDone,
+    updateDone,
+    updateContent,
     removeTodo,
     inputSearchRef,
     searchTodo,
     resetTodo,
+    filterTodo,
     getTargetJson,
   };
 };

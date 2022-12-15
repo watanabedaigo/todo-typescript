@@ -19,8 +19,8 @@ const Search: React.FC<SearchProps> = React.memo(
     return (
       <div>
         <InputForm placeholder="todoを検索" inputSearchRef={inputSearchRef} />
-        <Button value="検索" callback={searchTodo} />
-        <Button value="条件クリア" callback={resetTodo} />
+        <Button label="検索" callback={searchTodo} />
+        <Button label="条件クリア" callback={resetTodo} />
       </div>
     );
   }

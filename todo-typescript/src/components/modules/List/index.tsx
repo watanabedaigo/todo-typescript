@@ -1,21 +1,22 @@
 import React from 'react';
 import { TodoType } from 'types/TodoType';
-import Button from 'components/atoms/Button';
-import { Link } from 'react-router-dom';
 import { EventType } from 'types/EventType';
+import styles from './styles.module.scss';
+import { Link } from 'react-router-dom';
+import Button from 'components/atoms/Button';
 
 // 型エイリアス
 // Addの型
 type ListProps = {
   notDoneTodos: TodoType[];
   doneTodos: TodoType[];
-  toggleDone: (event: EventType) => void;
+  updateDone: (event: EventType) => void;
   removeTodo: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const List: React.FC<ListProps> = React.memo(
-  ({ notDoneTodos, doneTodos, toggleDone, removeTodo }) => {
+  ({ notDoneTodos, doneTodos, updateDone, removeTodo }) => {
     console.log('List レンダリング');
 
     return (
@@ -28,15 +29,15 @@ const List: React.FC<ListProps> = React.memo(
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
                   <Link to={`detail/${todo.id}`}>
-                    <Button value="詳細" />
+                    <Button label="詳細" />
                   </Link>
                   <Link to={`edit/${todo.id}`}>
-                    <Button value="編集" />
+                    <Button label="編集" />
                   </Link>
-                  <Button value="削除" callback={removeTodo} />
+                  <Button label="削除" callback={removeTodo} />
                   <Button
-                    value={todo.done ? '未完了へ' : '完了へ'}
-                    callback={toggleDone}
+                    label={todo.done ? '未完了へ' : '完了へ'}
+                    callback={updateDone}
                   />
                 </li>
               );
@@ -51,15 +52,15 @@ const List: React.FC<ListProps> = React.memo(
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
                   <Link to={`detail/${todo.id}`}>
-                    <Button value="詳細" />
+                    <Button label="詳細" />
                   </Link>
                   <Link to={`edit/${todo.id}`}>
-                    <Button value="編集" />
+                    <Button label="編集" />
                   </Link>
-                  <Button value="削除" callback={removeTodo} />
+                  <Button label="削除" callback={removeTodo} />
                   <Button
-                    value={todo.done ? '未完了へ' : '完了へ'}
-                    callback={toggleDone}
+                    label={todo.done ? '未完了へ' : '完了へ'}
+                    callback={updateDone}
                   />
                 </li>
               );

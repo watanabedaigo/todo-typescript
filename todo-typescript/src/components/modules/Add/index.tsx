@@ -1,29 +1,33 @@
 import React, { useCallback, useRef } from 'react';
+import { EventType } from 'types/EventType';
 import styles from './styles.module.scss';
+import { Link } from 'react-router-dom';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
-import { Link } from 'react-router-dom';
-import { EventType } from 'types/EventType';
 
 // 型エイリアス
 // Addの型
 type AddProps = {
-  inputAddRef: React.MutableRefObject<HTMLInputElement>;
-  addTodo: (event: EventType) => void;
-  placeholder: string;
-  value: string;
+  inputRef: React.MutableRefObject<HTMLInputElement>;
+  callback: (event: EventType) => void;
+  label: string;
+  initValue?: string;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const Add: React.FC<AddProps> = React.memo(
-  ({ inputAddRef, addTodo, placeholder, value }) => {
+  ({ inputRef, callback, label, initValue }) => {
     console.log('Add レンダリング');
 
     return (
       <div>
-        <InputForm placeholder={placeholder} inputAddRef={inputAddRef} />
+        <InputForm
+          placeholder="todoを入力"
+          inputRef={inputRef}
+          initValue={initValue}
+        />
         <Link to={'/'}>
-          <Button value={value} callback={addTodo} />
+          <Button label={label} callback={callback} />
         </Link>
         <p>
           <Link to={'/'}>to TodoPage</Link>

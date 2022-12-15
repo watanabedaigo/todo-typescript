@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useTodo } from 'hooks/useTodo';
+import styles from './styles.module.scss';
 import Add from 'components/modules/Add';
 
 const CreateTemplate: React.FC = () => {
   console.log('CreateTemplate レンダリング');
 
   // カスタムフックからロジックを受け取る
-  const { inputAddRef, addTodo } = useTodo();
+  const { inputRef, addTodo } = useTodo();
 
   return (
     <div>
-      <Add
-        inputAddRef={inputAddRef}
-        addTodo={addTodo}
-        placeholder="todoを入力"
-        value="追加"
-      />
+      <Add inputRef={inputRef} callback={addTodo} label="追加" />
     </div>
   );
 };

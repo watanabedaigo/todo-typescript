@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.scss';
 import { useTodo } from 'hooks/useTodo';
-import { Link } from 'react-router-dom';
 import Add from 'components/modules/Add';
-import Search from 'components/modules/Search';
-import List from 'components/modules/List';
-import { TodoType } from 'types/TodoType';
-import TodoPage from 'pages/TodoPage';
 
 const EditTemplate: React.FC = () => {
   console.log('EditTemplate レンダリング');
 
   // カスタムフックからロジックを受け取る
-  const { getTargetJson, inputAddRef, addTodo } = useTodo();
+  const { getTargetJson, inputRef, updateContent } = useTodo();
 
   // 関数の戻り値を変数に格納
   const targetJson = getTargetJson();
@@ -22,10 +18,10 @@ const EditTemplate: React.FC = () => {
       <div>
         <p>{targetJson.content}</p>
         <Add
-          inputAddRef={inputAddRef}
-          addTodo={addTodo}
-          placeholder={targetJson.content}
-          value="編集"
+          inputRef={inputRef}
+          callback={updateContent}
+          label="編集"
+          initValue={targetJson.content}
         />
       </div>
     );

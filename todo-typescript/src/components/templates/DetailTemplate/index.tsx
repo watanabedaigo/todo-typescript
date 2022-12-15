@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.scss';
 import { useTodo } from 'hooks/useTodo';
 import { Link } from 'react-router-dom';
-import Add from 'components/modules/Add';
-import Search from 'components/modules/Search';
-import List from 'components/modules/List';
-import { TodoType } from 'types/TodoType';
 
 const DetailTemplate: React.FC = () => {
   console.log('DetailTemplate レンダリング');
