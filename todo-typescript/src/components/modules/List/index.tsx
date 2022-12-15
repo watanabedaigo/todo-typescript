@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { TodoType } from 'types/TodoType';
 import Button from 'components/atoms/Button';
+import { Link } from 'react-router-dom';
 import { EventType } from 'types/EventType';
 
 // 型エイリアス
@@ -26,6 +27,12 @@ const List: React.FC<ListProps> = React.memo(
               return (
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
+                  <Link to={`detail/${todo.id}`}>
+                    <Button value="詳細" />
+                  </Link>
+                  <Link to={`edit/${todo.id}`}>
+                    <Button value="編集" />
+                  </Link>
                   <Button value="削除" callback={removeTodo} />
                   <Button
                     value={todo.done ? '未完了へ' : '完了へ'}
@@ -43,6 +50,12 @@ const List: React.FC<ListProps> = React.memo(
               return (
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
+                  <Link to={`detail/${todo.id}`}>
+                    <Button value="詳細" />
+                  </Link>
+                  <Link to={`edit/${todo.id}`}>
+                    <Button value="編集" />
+                  </Link>
                   <Button value="削除" callback={removeTodo} />
                   <Button
                     value={todo.done ? '未完了へ' : '完了へ'}

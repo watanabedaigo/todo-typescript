@@ -6,7 +6,7 @@ import { EventType } from 'types/EventType';
 // Buttonの型
 type ButtonProps = {
   value: string;
-  callback: (event: EventType) => void;
+  callback?: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止

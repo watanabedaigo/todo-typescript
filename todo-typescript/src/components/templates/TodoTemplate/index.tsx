@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTodo } from 'hooks/useTodo';
-import Add from 'components/modules/Add';
+import { Link } from 'react-router-dom';
 import Search from 'components/modules/Search';
 import List from 'components/modules/List';
 
@@ -11,8 +11,6 @@ const TodoTemplate: React.FC = () => {
   const {
     notDoneTodos,
     doneTodos,
-    inputAddRef,
-    addTodo,
     toggleDone,
     removeTodo,
     inputSearchRef,
@@ -22,7 +20,9 @@ const TodoTemplate: React.FC = () => {
 
   return (
     <div>
-      <Add inputAddRef={inputAddRef} addTodo={addTodo} />
+      <p>
+        <Link to={'create'}>to CreatePage</Link>
+      </p>
       <Search
         inputSearchRef={inputSearchRef}
         searchTodo={searchTodo}

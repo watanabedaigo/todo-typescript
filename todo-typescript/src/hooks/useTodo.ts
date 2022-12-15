@@ -176,6 +176,28 @@ export const useTodo = () => {
     setDoneTodos([...doneTodos]);
   };
 
+  // パスからidを切り取り、そのidから該当のjsonデータを取得
+  const getTargetJson = () => {
+    // URLのパス取得
+    const path = window.location.pathname;
+
+    // パスからid取得
+    // /の位置をインデックス番号で取得
+    const firstSlashIndex = path.indexOf('/');
+    const secondSlashIndex = path.indexOf('/', firstSlashIndex + 1);
+    const idStartIndex = secondSlashIndex + 1;
+
+    // sliceでid部分のみ切り取り
+    const targetId = path.slice(idStartIndex);
+
+    // idから該当のjsonデータを抽出
+    const target: TodoType = allTodos.find((todo) => {
+      return todo.id === targetId;
+    }) as TodoType;
+
+    return target;
+  };
+
   return {
     allTodos,
     notDoneTodos,
@@ -189,5 +211,6 @@ export const useTodo = () => {
     inputSearchRef,
     searchTodo,
     resetTodo,
+    getTargetJson,
   };
 };
