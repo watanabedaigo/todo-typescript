@@ -28,12 +28,8 @@ const List: React.FC<ListProps> = React.memo(
               return (
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
-                  <Link to={`detail/${todo.id}`}>
-                    <Button label="詳細" />
-                  </Link>
-                  <Link to={`edit/${todo.id}`}>
-                    <Button label="編集" />
-                  </Link>
+                  <Link to={`detail/${todo.id}`}>詳細</Link>
+                  <Link to={`edit/${todo.id}`}>編集</Link>
                   <Button label="削除" callback={removeTodo} />
                   <Button
                     label={todo.done ? '未完了へ' : '完了へ'}
@@ -51,12 +47,8 @@ const List: React.FC<ListProps> = React.memo(
               return (
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
-                  <Link to={`detail/${todo.id}`}>
-                    <Button label="詳細" />
-                  </Link>
-                  <Link to={`edit/${todo.id}`}>
-                    <Button label="編集" />
-                  </Link>
+                  <Link to={`detail/${todo.id}`}>詳細</Link>
+                  <Link to={`edit/${todo.id}`}>編集</Link>
                   <Button label="削除" callback={removeTodo} />
                   <Button
                     label={todo.done ? '未完了へ' : '完了へ'}
