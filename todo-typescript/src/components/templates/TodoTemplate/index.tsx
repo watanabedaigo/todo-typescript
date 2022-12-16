@@ -21,7 +21,7 @@ const TodoTemplate: React.FC = () => {
   return (
     <div>
       <p>
-        <Link to={'create'}>to CreatePage</Link>
+        <Link to={'create'}>追加</Link>
       </p>
       <Search
         inputSearchRef={inputSearchRef}

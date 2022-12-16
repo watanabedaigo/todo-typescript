@@ -1,6 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { EventType } from 'types/EventType';
 import styles from './styles.module.scss';
+import { Link } from 'react-router-dom';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
 
@@ -26,7 +27,7 @@ const Add: React.FC<AddProps> = React.memo(
           initValue={initValue}
         />
         <Button label={label} callback={callback} isRouter={true} />
-        <p>to TodoPage</p>
+        <Link to={'/'}>トップ</Link>
       </div>
     );
   }
