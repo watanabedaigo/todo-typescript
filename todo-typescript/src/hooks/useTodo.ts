@@ -139,25 +139,43 @@ export const useTodo = () => {
 
   // 関数（api以外）
   // search
-  const searchTodo = () => {
-    // 入力値取得
-    let value = inputSearchRef.current.value;
+  const searchTodo = (searchValue?: string) => {
+    if (searchValue) {
+      // 検索ワードを含むもののみ、notDoneTodosから抽出
+      const targetNotDoneTodos = notDoneTodos.filter((todo) => {
+        return todo.content.indexOf(searchValue) !== -1;
+      });
 
-    // 検索ワードを含むもののみ、notDoneTodosから抽出
-    const targetNotDoneTodos = notDoneTodos.filter((todo) => {
-      return todo.content.indexOf(value) !== -1;
-    });
+      // State更新
+      setNotDoneTodos([...targetNotDoneTodos]);
 
-    // State更新
-    setNotDoneTodos([...targetNotDoneTodos]);
+      // 検索ワードを含むもののみ、doneTodosから抽出
+      const targetDoneTodos = doneTodos.filter((todo) => {
+        return todo.content.indexOf(searchValue) !== -1;
+      });
 
-    // 検索ワードを含むもののみ、doneTodosから抽出
-    const targetDoneTodos = doneTodos.filter((todo) => {
-      return todo.content.indexOf(value) !== -1;
-    });
+      // State更新
+      setDoneTodos([...targetDoneTodos]);
+    } else {
+      // 入力値取得
+      let value = inputSearchRef.current.value;
 
-    // State更新
-    setDoneTodos([...targetDoneTodos]);
+      // 検索ワードを含むもののみ、notDoneTodosから抽出
+      const targetNotDoneTodos = notDoneTodos.filter((todo) => {
+        return todo.content.indexOf(value) !== -1;
+      });
+
+      // State更新
+      setNotDoneTodos([...targetNotDoneTodos]);
+
+      // 検索ワードを含むもののみ、doneTodosから抽出
+      const targetDoneTodos = doneTodos.filter((todo) => {
+        return todo.content.indexOf(value) !== -1;
+      });
+
+      // State更新
+      setDoneTodos([...targetDoneTodos]);
+    }
 
     // input初期化
     inputSearchRef.current.value = '';
@@ -215,11 +233,13 @@ export const useTodo = () => {
 
   return {
     allTodos,
+    setAllTodos,
     notDoneTodos,
     doneTodos,
     setNotDoneTodos,
     setDoneTodos,
     inputRef,
+    fetchTodo,
     addTodo,
     updateDone,
     updateContent,
