@@ -228,6 +228,7 @@ export const useTodo = () => {
     doneTodos,
     setNotDoneTodos,
     setDoneTodos,
+    setInputValue,
     inputRef,
     fetchTodo,
     addTodo,
