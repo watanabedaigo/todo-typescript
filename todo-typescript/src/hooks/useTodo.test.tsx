@@ -89,45 +89,33 @@ describe('useTodo', () => {
           expect(target.value).toBe('');
         });
       });
-
-      // it('データ追加後に、フォームが空になっている', async () => {
-      //   // hookをレンダー
-      //   const { result } = renderHook(() => useTodo());
-      //   // 新規追加する内容を変数で管理。ユニークな値を持たせるために、追加した日時を入れる
-      //   const time = new Date();
-      //   const month = time.getMonth() + 1;
-      //   const day = time.getDate();
-      //   const hour = time.getHours();
-      //   const minute = time.getMinutes();
-      //   const second = time.getSeconds();
-      //   const newTodo = `input empty test by${month}/${day} ${hour}:${minute}:${second}`;
-      //   // act()で囲むことで、hookで管理しているstateが更新されDOMに反映されることが保証される
-      //   act(() => {
-      //     // state更新
-      //     result.current.setInputValue(newTodo);
-      //   });
-      //   // addTodo実行
-      //   result.current.addTodo();
-      //   // 該当コンポーネントをレンダリング
-      //   render(
-      //     <BrowserRouter>
-      //       <CreatePage />
-      //     </BrowserRouter>
-      //   );
-      //   // 非同期処理の結果を待ちたいので、waitForを用いる
-      //   await waitFor(() => {
-      //     // 検証のターゲットを取得
-      //     const target = screen.getByPlaceholderText(
-      //       /todoを入力/i
-      //     ) as HTMLInputElement;
-      //     // 結果確認
-      //     expect(target.value).toBe('');
-      //   });
-      // });
     });
-    // describe('【関数テスト】updateDone', () => {
-    //   it('test', () => {});
-    // });
+    describe('【関数テスト】updateDone', () => {
+      it('データを更新し、doneが反転する', async () => {
+        // 該当コンポーネントをレンダリング
+        render(
+          <BrowserRouter>
+            <TodoPage />
+          </BrowserRouter>
+        );
+        // 非同期処理の結果を待ちたいので、waitForを用いる
+        await waitFor(() => {
+          // 全ての「完了へ」ボタンを配列で取得
+          const targets = screen.getAllByText('完了へ') as HTMLButtonElement[];
+          // 配列に対して繰り返し処理
+          for (let target of targets) {
+            // クリックイベント実行、doneをfalse→trueに変更
+            fireEvent.click(target);
+          }
+          // 全ての要素が完了へ移動しているはずなので、「完了へ」ボタンは存在しないことを確認
+          // 検証のターゲットを取得、存在しないことを確認したいため、エラーが投げられないようにgetByではなくqueryByを用いる
+          const target = screen.queryByText('完了へ');
+          // 結果確認
+          // queryByでは要素がなかった場合にnullが返ってくるので、toBeNullで確認
+          expect(target).toBeNull();
+        });
+      });
+    });
     // describe('【関数テスト】updateContent', () => {
     //   it('test', () => {});
     // });
