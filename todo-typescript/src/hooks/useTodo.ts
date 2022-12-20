@@ -73,6 +73,7 @@ export const useTodo = () => {
 
         // input初期化
         setInputValue('');
+        inputRef.current.value = '';
       })
       .catch((Error) => {
         console.error(Error);
@@ -114,6 +115,10 @@ export const useTodo = () => {
 
     // json変更
     apis.putTodo(target.id, target);
+
+    // input初期化
+    setInputValue('');
+    inputRef.current.value = '';
   };
 
   // DELETE
@@ -162,7 +167,7 @@ export const useTodo = () => {
     setDoneTodos([...targetDoneTodos]);
 
     // input初期化
-    inputSearchRef.current.value = '';
+    setInputValue('');
   };
 
   // reset
@@ -171,6 +176,7 @@ export const useTodo = () => {
     filterTodo(allTodos);
 
     // input初期化
+    setInputValue('');
     inputSearchRef.current.value = '';
   };
 
