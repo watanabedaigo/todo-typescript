@@ -38,7 +38,12 @@ describe('useTodo', () => {
       });
     });
     describe('【関数テスト】addTodo', () => {
-      it('test', () => {});
+      it('データを追加し、DOMに反映される', () => {
+        // hookをレンダー
+        const { result } = renderHook(() => useTodo());
+      });
+
+      it('データ追加後に、フォームが空になっている', () => {});
     });
     describe('【関数テスト】updateDone', () => {
       it('test', () => {});

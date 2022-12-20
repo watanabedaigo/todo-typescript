@@ -14,6 +14,7 @@ const TodoTemplate: React.FC = () => {
     updateDone,
     removeTodo,
     inputSearchRef,
+    getInputValue,
     searchTodo,
     resetTodo,
   } = useTodo();
@@ -27,6 +28,7 @@ const TodoTemplate: React.FC = () => {
         inputSearchRef={inputSearchRef}
         searchTodo={searchTodo}
         resetTodo={resetTodo}
+        getInputValue={getInputValue}
       />
       <List
         notDoneTodos={notDoneTodos}

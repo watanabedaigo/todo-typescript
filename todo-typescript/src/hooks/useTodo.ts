@@ -7,12 +7,14 @@ import { EventType } from 'types/EventType';
 export const useTodo = () => {
   // hooks
   // useState
-  // 全てのtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
+  // 全てのtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト。初期値は空の配列。
   const [allTodos, setAllTodos] = useState<TodoType[]>([]);
-  // 未完了(done: false)のtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
+  // 未完了(done: false)のtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト。初期値は空の配列。
   const [notDoneTodos, setNotDoneTodos] = useState<TodoType[]>([]);
-  // 未完了(done: true)のtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト
+  // 未完了(done: true)のtodoを扱うstate。配列で、中身は型エイリアスTodoを型に持つオブジェクト。初期値は空の配列。
   const [doneTodos, setDoneTodos] = useState<TodoType[]>([]);
+  // フォームで入力された内容を扱うstate。文字列。初期値は空の文字列。
+  const [inputValue, setInputValue] = useState<string>('');
 
   // useEffect
   // 依存配列は空なので、初回レンダリング後に実行される
@@ -54,13 +56,10 @@ export const useTodo = () => {
 
   // POST
   const addTodo = () => {
-    // 入力値取得
-    let value: string = inputRef.current.value;
-
     // 追加データをオブジェクトで作成
     const newTodo: TodoType = {
       id: ulid(),
-      content: value,
+      content: inputValue,
       done: false,
     };
 
@@ -73,7 +72,7 @@ export const useTodo = () => {
         setNotDoneTodos([...notDoneTodos, newTodo]);
 
         // input初期化
-        inputRef.current.value = '';
+        setInputValue('');
       })
       .catch((Error) => {
         console.error(Error);
@@ -107,14 +106,11 @@ export const useTodo = () => {
 
   // PUT（contentプロパティ）
   const updateContent = (event: EventType) => {
-    // 入力値取得
-    let value: string = inputRef.current.value;
-
     // ターゲットDOM取得
     const target: TodoType = getTargetJson();
 
     // ターゲットjsonのcontentを上書き
-    target.content = value;
+    target.content = inputValue;
 
     // json変更
     apis.putTodo(target.id, target);
@@ -138,44 +134,32 @@ export const useTodo = () => {
   }, []);
 
   // 関数（api以外）
-  // search
-  const searchTodo = (searchValue?: string) => {
-    if (searchValue) {
-      // 検索ワードを含むもののみ、notDoneTodosから抽出
-      const targetNotDoneTodos = notDoneTodos.filter((todo) => {
-        return todo.content.indexOf(searchValue) !== -1;
-      });
-
-      // State更新
-      setNotDoneTodos([...targetNotDoneTodos]);
-
-      // 検索ワードを含むもののみ、doneTodosから抽出
-      const targetDoneTodos = doneTodos.filter((todo) => {
-        return todo.content.indexOf(searchValue) !== -1;
-      });
-
-      // State更新
-      setDoneTodos([...targetDoneTodos]);
-    } else {
-      // 入力値取得
-      let value = inputSearchRef.current.value;
-
-      // 検索ワードを含むもののみ、notDoneTodosから抽出
-      const targetNotDoneTodos = notDoneTodos.filter((todo) => {
-        return todo.content.indexOf(value) !== -1;
-      });
-
-      // State更新
-      setNotDoneTodos([...targetNotDoneTodos]);
-
-      // 検索ワードを含むもののみ、doneTodosから抽出
-      const targetDoneTodos = doneTodos.filter((todo) => {
-        return todo.content.indexOf(value) !== -1;
-      });
-
-      // State更新
-      setDoneTodos([...targetDoneTodos]);
+  // inputに入力された値を取得
+  const getInputValue = (event: EventType) => {
+    // event.currentTarget.valueでエラーが出ないようにtypeguard
+    if (event.currentTarget instanceof HTMLInputElement) {
+      const target = event.currentTarget;
+      setInputValue(target.value);
     }
+  };
+
+  // search
+  const searchTodo = () => {
+    // 検索ワードを含むもののみ、notDoneTodosから抽出
+    const targetNotDoneTodos = notDoneTodos.filter((todo) => {
+      return todo.content.indexOf(inputValue) !== -1;
+    });
+
+    // State更新
+    setNotDoneTodos([...targetNotDoneTodos]);
+
+    // 検索ワードを含むもののみ、doneTodosから抽出
+    const targetDoneTodos = doneTodos.filter((todo) => {
+      return todo.content.indexOf(inputValue) !== -1;
+    });
+
+    // State更新
+    setDoneTodos([...targetDoneTodos]);
 
     // input初期化
     inputSearchRef.current.value = '';
@@ -245,6 +229,7 @@ export const useTodo = () => {
     updateContent,
     removeTodo,
     inputSearchRef,
+    getInputValue,
     searchTodo,
     resetTodo,
     filterTodo,

@@ -7,11 +7,16 @@ const CreateTemplate: React.FC = () => {
   console.log('CreateTemplate レンダリング');
 
   // カスタムフックからロジックを受け取る
-  const { inputRef, addTodo } = useTodo();
+  const { inputRef, addTodo, getInputValue } = useTodo();
 
   return (
     <div>
-      <Add inputRef={inputRef} callback={addTodo} label="追加" />
+      <Add
+        inputRef={inputRef}
+        callback={addTodo}
+        getInputValue={getInputValue}
+        label="追加"
+      />
     </div>
   );
 };

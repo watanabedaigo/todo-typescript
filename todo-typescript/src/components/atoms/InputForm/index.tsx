@@ -1,4 +1,5 @@
 import React from 'react';
+import { EventType } from 'types/EventType';
 import styles from './styles.module.scss';
 
 // 型エイリアス
@@ -8,11 +9,12 @@ type InputFormProps = {
   inputRef?: React.MutableRefObject<HTMLInputElement>;
   inputSearchRef?: React.MutableRefObject<HTMLInputElement>;
   initValue?: string;
+  getInputValue: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const InputForm: React.FC<InputFormProps> = React.memo(
-  ({ placeholder, inputRef, inputSearchRef, initValue }) => {
+  ({ placeholder, inputRef, inputSearchRef, initValue, getInputValue }) => {
     console.log('InputForm レンダリング');
 
     return (
@@ -21,6 +23,7 @@ const InputForm: React.FC<InputFormProps> = React.memo(
         placeholder={placeholder}
         ref={inputRef ? inputRef : inputSearchRef}
         defaultValue={initValue}
+        onChange={getInputValue}
       />
     );
   }

@@ -7,7 +7,7 @@ const EditTemplate: React.FC = () => {
   console.log('EditTemplate レンダリング');
 
   // カスタムフックからロジックを受け取る
-  const { getTargetJson, inputRef, updateContent } = useTodo();
+  const { getTargetJson, inputRef, updateContent, getInputValue } = useTodo();
 
   // 関数の戻り値を変数に格納
   const targetJson = getTargetJson();
@@ -22,6 +22,7 @@ const EditTemplate: React.FC = () => {
           callback={updateContent}
           label="編集"
           initValue={targetJson.content}
+          getInputValue={getInputValue}
         />
       </div>
     );

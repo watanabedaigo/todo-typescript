@@ -12,11 +12,12 @@ type AddProps = {
   callback: (event: EventType) => void;
   label: string;
   initValue?: string;
+  getInputValue: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
 const Add: React.FC<AddProps> = React.memo(
-  ({ inputRef, callback, label, initValue }) => {
+  ({ inputRef, callback, label, initValue, getInputValue }) => {
     console.log('Add レンダリング');
 
     return (
@@ -25,6 +26,7 @@ const Add: React.FC<AddProps> = React.memo(
           placeholder="todoを入力"
           inputRef={inputRef}
           initValue={initValue}
+          getInputValue={getInputValue}
         />
         <Button label={label} callback={callback} isRouter={true} />
         <Link to={'/'}>トップ</Link>
