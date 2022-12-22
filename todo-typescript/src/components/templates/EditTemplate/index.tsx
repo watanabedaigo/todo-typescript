@@ -27,11 +27,7 @@ const EditTemplate: React.FC = () => {
       </div>
     );
   } else {
-    return (
-      <div>
-        <p>EditTemplate</p>
-      </div>
-    );
+    return <div></div>;
   }
 };
 
