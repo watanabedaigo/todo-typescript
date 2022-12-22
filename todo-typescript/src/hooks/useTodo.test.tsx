@@ -51,10 +51,7 @@ describe('useTodo', () => {
         const time = new Date();
         const month = time.getMonth() + 1;
         const day = time.getDate();
-        const hour = time.getHours();
-        const minute = time.getMinutes();
-        const second = time.getSeconds();
-        const newTodo = `addTodo test by${month}/${day} ${hour}:${minute}:${second}`;
+        const newTodo = `addTodo test by${month}/${day}`;
         // act()で囲むことで、hookで管理しているstateが更新されDOMに反映されることが保証される
         act(() => {
           // state更新
@@ -170,9 +167,35 @@ describe('useTodo', () => {
         // // ---
       });
     });
-    // describe('【関数テスト】removeTodo', () => {
-    //   it('test', () => {});
-    // });
+    describe('【関数テスト】removeTodo', () => {
+      it('データを削除し、DOMに反映される', async () => {
+        // 該当コンポーネントをレンダリング
+        render(
+          <BrowserRouter>
+            <TodoPage />
+          </BrowserRouter>
+        );
+        // 削除する内容を変数で管理。ユニークな値を持たせるために、追加した日時を入れる
+        const time = new Date();
+        const month = time.getMonth() + 1;
+        const day = time.getDate();
+        const deleteTodo = `addTodo test by${month}/${day}`;
+        // 非同期処理の結果を待ちたいので、waitForを用いる
+        await waitFor(() => {
+          // 削除する内容に対応するボタンを取得
+          const target = screen
+            .getByText(deleteTodo)
+            .closest('li')
+            ?.querySelector('button') as HTMLButtonElement;
+          // イベント発火、要素削除
+          fireEvent.click(target);
+          // 検証のターゲットを取得
+          const targetItem = screen.queryByText(deleteTodo);
+          // 結果確認
+          expect(targetItem).toBeNull();
+        });
+      });
+    });
   });
 
   describe('関数（api以外）', () => {

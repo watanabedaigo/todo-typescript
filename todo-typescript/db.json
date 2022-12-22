@@ -9,56 +9,6 @@
       "id": "01GMQD1N31B9YEXBT2SHX5A4HX",
       "content": "fetchTodo test",
       "done": true
-    },
-    {
-      "id": "01GMWKF80GHZS6M6VHQEJS5T9K",
-      "content": "addTodo test by12/22 18:43:44",
-      "done": true
-    },
-    {
-      "id": "01GMWKHCZ700F2TNJ5S6QG0F88",
-      "content": "addTodo test by12/22 18:44:55",
-      "done": true
-    },
-    {
-      "id": "01GMWKKJ65XHCWPZBNA3AS3GYE",
-      "content": "addTodo test by12/22 18:46:6",
-      "done": true
-    },
-    {
-      "id": "01GMWM3BF388AH3N1G0PVC8SQQ",
-      "content": "addTodo test by12/22 18:54:43",
-      "done": true
-    },
-    {
-      "id": "01GMWRZD9WJ8G8J20RXXJY3R26",
-      "content": "addTodo test by12/22 20:19:57",
-      "done": true
-    },
-    {
-      "id": "01GMWS192QT7PG6NPV93WXDKJ8",
-      "content": "addTodo test by12/22 20:20:58",
-      "done": true
-    },
-    {
-      "id": "01GMWS6W9FPFS2F3EM1B35WBBM",
-      "content": "addTodo test by12/22 20:24:2",
-      "done": true
-    },
-    {
-      "id": "01GMWS80HKQQPP85VQ2FKBTHXV",
-      "content": "addTodo test by12/22 20:24:39",
-      "done": true
-    },
-    {
-      "id": "01GMWS98VSX0KTGYSVW292DC9T",
-      "content": "addTodo test by12/22 20:25:20",
-      "done": true
-    },
-    {
-      "id": "01GMWS9ZQ7KJ7PVPKWWM2041M1",
-      "content": "addTodo test by12/22 20:25:44",
-      "done": true
     }
   ]
 }
