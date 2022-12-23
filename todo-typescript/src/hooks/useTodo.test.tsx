@@ -121,10 +121,6 @@ describe('useTodo', () => {
 
     describe('【関数テスト】updateContent', () => {
       it('データを更新し、変更内容が反映される', async () => {
-        // React Routerのテストのため、パスを指定する
-        // const history = createMemoryHistory();
-        // history.push('/edit/01GMQCGWP9AQQG1X1HRCJ7JE3H');
-        // const initRoute = '/edit/01GMQCGWP9AQQG1X1HRCJ7JE3H';
         // // ---
         // // hookをレンダー
         // const { result } = renderHook(() => useTodo());
@@ -198,41 +194,41 @@ describe('useTodo', () => {
     });
   });
 
-  // describe('関数（api以外）', () => {
-  //   describe('【関数テスト】searchTodo', () => {
-  //     it('データを検索し、DOMに反映される', async () => {
-  //       // hookをレンダー
-  //       const { result } = renderHook(() => useTodo());
-  //       // fetchTodo実行
-  //       result.current.fetchTodo(false);
-  //       // 該当コンポーネントをレンダリング
-  //       render(
-  //         <BrowserRouter>
-  //           <TodoPage />
-  //         </BrowserRouter>
-  //       );
-  //       // 非同期処理の結果を待ちたいので、waitForを用いる
-  //       await waitFor(() => {
-  //         // act()で囲むことで、hookで管理しているstateが更新されDOMに反映されることが保証される
-  //         act(() => {
-  //           // 検索する文字列を変数で管理
-  //           const searchValue = 'search';
-  //           // state更新
-  //           result.current.setInputValue(searchValue);
-  //           // searchTodo実行
-  //           result.current.searchTodo();
-  //         });
-  //         // 検証のターゲットを取得
-  //         const target = screen.getByText('fetchTod test');
-  //         // 結果確認
-  //         expect(target).toBeTruthy();
-  //       });
-  //     });
-  //   });
-  //   describe('【関数テスト】resetTodo', () => {
-  //     it('検索条件をクリアし、全データが表示される', () => {});
-  //   });
-  // });
+  describe('関数（api以外）', () => {
+    describe('【関数テスト】searchTodo', () => {
+      it('データを検索し、DOMに反映される', async () => {
+        // // hookをレンダー
+        // const { result } = renderHook(() => useTodo());
+        // // fetchTodo実行
+        // result.current.fetchTodo(false);
+        // // 該当コンポーネントをレンダリング
+        // render(
+        //   <BrowserRouter>
+        //     <TodoPage />
+        //   </BrowserRouter>
+        // );
+        // // 非同期処理の結果を待ちたいので、waitForを用いる
+        // await waitFor(() => {
+        //   // act()で囲むことで、hookで管理しているstateが更新されDOMに反映されることが保証される
+        //   act(() => {
+        //     // 検索する文字列を変数で管理
+        //     const searchValue = 'search';
+        //     // state更新
+        //     result.current.setInputValue(searchValue);
+        //     // searchTodo実行
+        //     result.current.searchTodo();
+        //   });
+        //   // 検証のターゲットを取得
+        //   const target = screen.getByText('fetchTod test');
+        //   // 結果確認
+        //   expect(target).toBeTruthy();
+        // });
+      });
+    });
+    describe('【関数テスト】resetTodo', () => {
+      it('検索条件をクリアし、全データが表示される', () => {});
+    });
+  });
 });
 
 // テスト実行環境確認用テスト
